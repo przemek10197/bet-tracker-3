@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "Hubot-Sans";
+  src: local("Hubot-Sans"),
+   url(@/fonts/Hubot-Sans/Hubot-Sans-Medium.ttf) format("truetype");
+}
+
+$color-primary: #2155CD;
+$color-secondary: #0AA1DD;
+$color-tertiary: #79DAE8;
+$color-supportive: #E8F9FD;
+$color-background: #F8F8F8;
+$color-background-secondary: #eeeeee;
+$color-alternative: #001E28;
+$color-positive: #2a9d8f;
+$color-positive-light: #EFFFEF;
+$color-negative: #e76f51;
+$color-warning: #e9c46a;
+$color-white: #FFFFFF;
+$color-text: #555e61;
+
+$spacing-unit: 4px;
+
+$border-radius: 4px;
+$border-radius-round: 300px;
+
+$font-family-default: "Hubot-Sans", sans-serif;
+$font-family-secondary: "Noto Sans", sans-serif;
+$font-weight-bold: 700;
+$font-size-xl: 22px;
+$font-size-l: 18px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-xs: 12px;
+
+$shadow-default: 0 0 12px rgba(0, 0, 0, 0.12);
+
+$transition-slide-right: 0.25s ease right;
