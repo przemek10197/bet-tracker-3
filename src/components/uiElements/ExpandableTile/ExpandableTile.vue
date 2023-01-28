@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Tile>
+    <Tile class="tile">
       <template #header>
         <slot name="header" />
       </template>
@@ -16,13 +16,15 @@
         </div>
       </template>
     </Tile>
-    <div
-      v-if="isTileExpanded"
-      type="button"
-      class="tile-panel"
-    >
-      <slot name="expand-section" />
-    </div>
+    <transition name="slide">
+      <div
+        v-if="isTileExpanded"
+        type="button"
+        class="tile-panel"
+      >
+        <slot name="expand-section" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -55,6 +57,11 @@ const onTileExpand = (): void => {
 
 $tile-panel-box-shadow: $shadow-default;
 
+.tile {
+  position: relative;
+  z-index: 1000;
+}
+
 .tile-footer {
   cursor: pointer;
 }
@@ -70,5 +77,19 @@ $tile-panel-box-shadow: $shadow-default;
 .footer-button {
   text-align: center;
   font-size: $font-size-l;
+}
+
+.slide-enter-active {
+  transition: all 0.1s ease;
+}
+
+.slide-leave-active {
+  transition: all 0.1s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>
