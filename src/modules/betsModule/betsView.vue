@@ -5,13 +5,21 @@
         <div>
           <bets-import />
 
-          <div class="bets-container">
+          <div
+            v-if="betsCount > 0"
+            class="bets-container"
+          >
             <bet-single
               v-for="bet in activeBets"
               :key="bet.id"
               :bet="bet"
             />
           </div>
+          <info-card v-else>
+            <template #description>
+              Brak aktywnych zakładów kombinacyjnych.
+            </template>
+          </info-card>
         </div>
       </tab>
       <tab title="Statistics">
@@ -26,6 +34,7 @@ import { computed, onMounted } from 'vue';
 
 import { TabGroup, Tab } from '@/components';
 
+import InfoCard from '@/modules/layoutModule/components/infoCard.component.vue';
 import Statistics from '@/modules/statisticsModule/statisticsView.vue';
 
 import BetsImport from './components/betsImport.component.vue';
@@ -41,6 +50,10 @@ const bets = computed(() => {
 
 const activeBets = computed(() => {
   return BetsService.getActiveBets(bets.value);
+});
+
+const betsCount = computed((): number => {
+  return activeBets.value.length;
 });
 
 onMounted(() => {

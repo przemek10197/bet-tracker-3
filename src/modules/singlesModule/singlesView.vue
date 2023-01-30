@@ -5,14 +5,20 @@
   >
     <singles-import />
 
-    <singles-header :singles-status="storeSingles.singlesStatus" />
-
-    <singles-table />
+    <div v-if="storeSinglesCount > 0">
+      <singles-header :singles-status="storeSingles.singlesStatus" />
+      <singles-table />
+    </div>
+    <info-card v-else>
+      <template #description> Brak aktywnych zakładów SOLO. </template>
+    </info-card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
+
+import InfoCard from '@/modules/layoutModule/components/infoCard.component.vue';
 
 import SinglesImport from './components/singlesImport.component.vue';
 import SinglesHeader from './components/singlesHeader.component.vue';
@@ -23,6 +29,14 @@ const storeSingles = useStoreSingles();
 
 const isLoaded = computed(() => {
   return storeSingles.isSinglesLoaded;
+});
+
+const storeSinglesCount = computed(() => {
+  if (!storeSingles.singles) {
+    return 1;
+  }
+
+  return storeSingles.singles.length;
 });
 
 onMounted(() => {
