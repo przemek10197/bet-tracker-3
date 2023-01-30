@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="areBetsLoaded">
     <tab-group :are-items-same-width="true">
       <tab title="Parlays">
         <div>
@@ -48,12 +48,20 @@ const bets = computed(() => {
   return storeBets.bets;
 });
 
+const areBetsLoaded = computed(() => {
+  return storeBets.areBetsLoaded;
+});
+
 const activeBets = computed(() => {
   return BetsService.getActiveBets(bets.value);
 });
 
 const betsCount = computed((): number => {
-  return activeBets.value.length;
+  if (!storeBets.bets) {
+    return 1;
+  }
+
+  return storeBets.bets.length;
 });
 
 onMounted(() => {

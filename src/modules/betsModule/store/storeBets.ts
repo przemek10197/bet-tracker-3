@@ -40,7 +40,6 @@ export const useStoreBets = defineStore('storeBets', {
         betsCollectionRef = collection(db, 'users', storeAuth.user.id, 'bets');
         betsCollectionQuery = query(betsCollectionRef);
         await this.getBets();
-        this.areBetsLoaded = true;
       } else {
         alert('Unable to fetch data - user not found');
       }
@@ -79,6 +78,7 @@ export const useStoreBets = defineStore('storeBets', {
             bets.push(bet);
           });
           this.bets = bets;
+          this.areBetsLoaded = true;
         },
       );
     },
