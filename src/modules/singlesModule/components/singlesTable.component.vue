@@ -59,8 +59,6 @@ const singles = computed((): SingleBetModel[] => {
   );
 
   singlesFinished = singlesFinished?.sort((single1, single2) => {
-    console.log(single1);
-    console.log(single2);
     if (single1.dateOfUpdate && single2.dateOfUpdate) {
       return single1.dateOfUpdate > single2.dateOfUpdate ? -1 : 0;
     }
