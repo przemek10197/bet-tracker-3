@@ -22,6 +22,8 @@
 import { computed } from 'vue';
 import type { PropType } from 'vue';
 
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
+
 import TargetSingle from './targetSingle.component.vue';
 import TargetsService from '../services/targets.service';
 import { useStoreTargets } from '../store/storeTargets';
@@ -36,6 +38,8 @@ const props = defineProps({
   },
 });
 
+const { setTargetRemoveNotification } = useNotifications();
+
 const groupedTargets = computed((): GroupedTarget => {
   return TargetsService.groupTargets(props.targets);
 });
@@ -46,6 +50,7 @@ const onTargetClick = (target: Target): void => {
   }
 
   storeTargets.deleteTarget(target.id);
+  setTargetRemoveNotification();
 };
 </script>
 

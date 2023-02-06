@@ -5,7 +5,7 @@
   >
     <singles-import />
 
-    <div v-if="storeSinglesCount > 0">
+    <div v-if="singlesCount > 0">
       <singles-header :singles-status="storeSingles.singlesStatus" />
       <singles-table />
     </div>
@@ -31,7 +31,7 @@ const isLoaded = computed(() => {
   return storeSingles.isSinglesLoaded;
 });
 
-const storeSinglesCount = computed(() => {
+const singlesCount = computed(() => {
   if (!storeSingles.singles) {
     return 1;
   }

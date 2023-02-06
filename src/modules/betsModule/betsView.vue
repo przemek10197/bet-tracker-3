@@ -15,7 +15,10 @@
               :bet="bet"
             />
           </div>
-          <info-card v-else>
+          <info-card
+            v-else
+            class="bets-empty-view"
+          >
             <template #description>
               Brak aktywnych zakładów kombinacyjnych.
             </template>
@@ -80,5 +83,9 @@ onMounted(() => {
 
 .bets-container {
   padding: 5 * $spacing-unit 10 * $spacing-unit;
+}
+
+.bets-empty-view {
+  margin-top: 10 * $spacing-unit;
 }
 </style>

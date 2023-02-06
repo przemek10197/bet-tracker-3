@@ -70,6 +70,8 @@ import type { PropType } from 'vue';
 import { IconButton } from '@/components';
 import { formatDate } from '@/utils';
 
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
+
 import { LegResult } from '../../types/bet.types';
 import type { Bet, BetLeg } from '../../models/bet.models';
 import { useStoreBets } from '../../store/storeBets';
@@ -80,6 +82,12 @@ const props = defineProps({
     required: true,
   },
 });
+
+const {
+  setLegWinNotification,
+  setLegLostNotification,
+  setLegPushNotification,
+} = useNotifications();
 
 const storeBets = useStoreBets();
 
@@ -101,6 +109,7 @@ const setWonLeg = (leg: BetLeg, index: number) => {
   newBet.betLegs[index] = newLeg;
 
   storeBets.updateBet(newBet);
+  setLegWinNotification(newLeg.fixtureName!);
 };
 
 const setLostLeg = (leg: BetLeg, index: number) => {
@@ -110,6 +119,7 @@ const setLostLeg = (leg: BetLeg, index: number) => {
   newBet.betLegs[index] = newLeg;
 
   storeBets.updateBet(newBet);
+  setLegLostNotification(newLeg.fixtureName!);
 };
 
 const setPushLeg = (leg: BetLeg, index: number) => {
@@ -123,6 +133,7 @@ const setPushLeg = (leg: BetLeg, index: number) => {
   newBet.betLegs[index] = newLeg;
 
   storeBets.updateBet(newBet);
+  setLegPushNotification(newLeg.fixtureName!);
 };
 </script>
 

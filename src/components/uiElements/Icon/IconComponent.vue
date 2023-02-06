@@ -1,6 +1,6 @@
 <template>
   <span
-    class="material-icons"
+    :class="['material-icons', 'icon']"
     :style="{ fontSize: iconSize }"
   >
     {{ iconName }}
@@ -25,3 +25,9 @@ const iconSize = computed(() => {
   return props.size ? `${props.size}px` : '16px';
 });
 </script>
+
+<style lang="scss" scoped>
+.icon {
+  cursor: default;
+}
+</style>

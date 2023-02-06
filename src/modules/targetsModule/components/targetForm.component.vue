@@ -133,9 +133,13 @@ import {
   InlineButton,
 } from '@/components';
 
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
+
 import { useStoreTargets } from '../store/storeTargets';
 import type { Target } from '../models/target.models';
 import { TargetSelectionName } from '../models/target.models';
+
+const { setTargetAddNotification } = useNotifications();
 
 const isFormOpen = ref(false);
 const targetsFormId = ref(0);
@@ -259,6 +263,7 @@ const onSubmit = async (): Promise<void> => {
 
   storeTargets.addTarget(targetToSend);
   clearForm();
+  setTargetAddNotification();
 };
 </script>
 

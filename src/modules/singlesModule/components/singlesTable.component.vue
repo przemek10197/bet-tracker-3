@@ -50,8 +50,14 @@ import { BetResult } from '@/modules/betsModule/types/bet.types';
 
 import { useStoreSingles } from '../store/storeSingles';
 import type { SingleBetModel } from '../models/singles.models';
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
 
 const storeSingles = useStoreSingles();
+const {
+  setSingleWinNotification,
+  setSingleLostNotification,
+  setSinglePushNotification,
+} = useNotifications();
 
 const singles = computed((): SingleBetModel[] => {
   let singlesFinished = storeSingles.singles?.filter(
@@ -112,6 +118,7 @@ const onWinSingleClick = (single: SingleBetModel) => {
   }
 
   storeSingles.updateSingle(newSingle);
+  setSingleWinNotification(newStatusValue);
 };
 
 const onPushSingleClick = (single: SingleBetModel) => {
@@ -120,6 +127,7 @@ const onPushSingleClick = (single: SingleBetModel) => {
   newSingle.dateOfUpdate = new Date().toISOString();
 
   storeSingles.updateSingle(newSingle);
+  setSinglePushNotification();
 };
 
 const onLooseSingleClick = (single: SingleBetModel) => {
@@ -138,6 +146,7 @@ const onLooseSingleClick = (single: SingleBetModel) => {
   }
 
   storeSingles.updateSingle(newSingle);
+  setSingleLostNotification(single.payin);
 };
 </script>
 

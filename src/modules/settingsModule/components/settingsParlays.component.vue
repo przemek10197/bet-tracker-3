@@ -48,11 +48,17 @@ import type { Ref } from 'vue';
 import { CardSection, IconButton, PrimaryButton } from '@/components';
 
 import StatisticsService from '@/modules/statisticsModule/services/statistics.service';
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
 
 enum StatusActionType {
   ADD = 'add',
   SUBTRACT = 'subtract',
 }
+
+const {
+  setSettingsAccountAddSuccessfullNotification,
+  setSettingsAccountSubtractSuccessfullNotification,
+} = useNotifications();
 
 let correctStatusActionType = ref(StatusActionType.ADD);
 
@@ -74,6 +80,12 @@ const setNewStatus = () => {
   const dateNow = new Date();
 
   StatisticsService.statisticsAdd(statValue!, dateNow.toISOString());
+
+  if (correctStatusActionType.value === StatusActionType.SUBTRACT) {
+    setSettingsAccountSubtractSuccessfullNotification(statValue!);
+  } else {
+    setSettingsAccountAddSuccessfullNotification(Math.abs(statValue!));
+  }
 };
 </script>
 

@@ -33,8 +33,12 @@ import fortunaLogo from '@/assets/logo-fortuna.svg';
 import betclicLogo from '@/assets/logo-betclic.svg';
 import stsLogo from '@/assets/logo-sts.png';
 
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
+
 import { Bookmaker } from '../models/enums';
 import BetImportService from '../services/betImport.service';
+
+const { setBetImportSuccessfullNotification } = useNotifications();
 
 const bookmakerLogo = (bookmakerValue?: Bookmaker | string): string => {
   const bookmaker = bookmakerValue ? bookmakerValue : Bookmaker.FORTUNA;
@@ -54,18 +58,21 @@ const importParlayFortuna = async (): Promise<void> => {
   await navigator.clipboard.readText().then((clipboardBet) => {
     BetImportService.importFromFortuna(clipboardBet);
   });
+  setBetImportSuccessfullNotification();
 };
 
 const importParlayBetclic = async (): Promise<void> => {
   await navigator.clipboard.readText().then((clipboardBet) => {
     BetImportService.importFromBetclic(clipboardBet);
   });
+  setBetImportSuccessfullNotification();
 };
 
 const importParlaySts = async (): Promise<void> => {
   await navigator.clipboard.readText().then((clipboardBet) => {
     BetImportService.importFromSts(clipboardBet);
   });
+  setBetImportSuccessfullNotification();
 };
 </script>
 
