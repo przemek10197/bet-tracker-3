@@ -10,6 +10,7 @@
         <router-view />
       </div>
     </div>
+    <notifications-list />
   </div>
 </template>
 
@@ -18,7 +19,9 @@ import { computed, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 
 import Navbar from '@/modules/layoutModule/components/navBar.component.vue';
+import NotificationsList from './modules/layoutModule/components/notifications/notificationsList.component.vue';
 import Auth from '@/modules/authModule/authView.vue';
+
 import { useStoreAuth } from './modules/authModule/store/storeAuth';
 
 const storeAuth = useStoreAuth();

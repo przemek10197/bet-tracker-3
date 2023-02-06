@@ -65,7 +65,6 @@ export const useStoreSingles = defineStore('storeSingles', {
         singlesStatusCollectionQuery = query(singlesStatusCollectionRef);
         await this.getSingles();
         await this.getSinglesStatus();
-        this.isSinglesLoaded = true;
       } else {
         alert('Unable to fetch data - user not found');
       }
@@ -80,6 +79,7 @@ export const useStoreSingles = defineStore('storeSingles', {
 
           querySnapshot.forEach((doc) => {
             const {
+              dateOfUpdate,
               fixtureName,
               marketName,
               oddsTotal,
@@ -96,8 +96,9 @@ export const useStoreSingles = defineStore('storeSingles', {
             } = doc.data();
 
             const single = {
-              id: doc.id,
+              dateOfUpdate,
               fixtureName,
+              id: doc.id,
               marketName,
               oddsTotal,
               payin,
@@ -114,6 +115,7 @@ export const useStoreSingles = defineStore('storeSingles', {
             singles.push(single);
           });
           this.singles = singles;
+          this.isSinglesLoaded = true;
         },
       );
     },

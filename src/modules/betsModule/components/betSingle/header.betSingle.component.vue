@@ -33,6 +33,7 @@ import betclicLogo from '@/assets/logo-betclic.svg';
 import stsLogo from '@/assets/logo-sts.png';
 
 import StatisticsService from '@/modules/statisticsModule/services/statistics.service';
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
 
 import { useStoreBets } from '../../store/storeBets';
 import type { Bet } from '../../models/bet.models';
@@ -47,6 +48,7 @@ const props = defineProps({
 });
 
 const storeBets = useStoreBets();
+const { setBetLostNotification, setBetWinNotification } = useNotifications();
 
 const bookmakerLogo = (bookmakerValue?: Bookmaker | string) => {
   const bookmaker = bookmakerValue ? bookmakerValue : Bookmaker.FORTUNA;
@@ -77,6 +79,7 @@ const onBetWin = () => {
   setTimeout(() => {
     storeBets.deleteBet(newBet.id!);
   }, 1000);
+  setBetWinNotification(totalWin);
 };
 
 const onBetLose = () => {
@@ -94,6 +97,7 @@ const onBetLose = () => {
   setTimeout(() => {
     storeBets.deleteBet(newBet.id!);
   }, 1000);
+  setBetLostNotification(Math.abs(totalLose));
 };
 </script>
 

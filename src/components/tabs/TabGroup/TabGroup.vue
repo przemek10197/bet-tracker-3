@@ -96,6 +96,7 @@ $tab-border: $tab-border-width solid #dddddd;
   box-shadow: $tab-shadow;
   list-style: none;
   padding: 0;
+  z-index: 1999;
 
   @include mobile {
     position: fixed;

@@ -121,7 +121,7 @@ $navbar-height: 60px;
   width: 100%;
   background-color: $color-white;
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .navbar__container {

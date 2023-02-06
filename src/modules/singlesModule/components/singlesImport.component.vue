@@ -12,10 +12,12 @@ import { PrimaryButton } from '@/components';
 
 import type { BetclicBetLeg } from '@/modules/betsModule/models/bet.models';
 import { BetResult } from '@/modules/betsModule/types/bet.types';
+import { useNotifications } from '@/modules/layoutModule/composables/notifications';
 
 import { useStoreSingles } from '../store/storeSingles';
 
 const storeSingles = useStoreSingles();
+const { setSingleAddNotification } = useNotifications();
 
 const onSinglePaste = async (): Promise<void> => {
   await navigator.clipboard.readText().then(async (value) => {
@@ -69,6 +71,7 @@ const onSinglePaste = async (): Promise<void> => {
     };
 
     await storeSingles.addSingle(singleToSend);
+    setSingleAddNotification(singleToSend.fixtureName);
   });
 };
 </script>
