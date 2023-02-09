@@ -56,6 +56,10 @@ const emit = defineEmits(['click']);
   color: $color-supportive;
   box-shadow: $shadow-default;
 
+  > span {
+    cursor: pointer;
+  }
+
   &:hover {
     opacity: 0.9;
   }

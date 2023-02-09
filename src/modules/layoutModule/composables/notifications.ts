@@ -9,7 +9,9 @@ export function useNotifications() {
     const notificationObject = {
       type: NotificationTypes.POSITIVE,
       title: 'Gratulacje!',
-      description: `Zakład rozstrzygnięty! Wygrałeś właśnie ${totalWin} PLN`,
+      description: `Zakład rozstrzygnięty! Wygrałeś właśnie ${totalWin.toFixed(
+        2,
+      )} PLN`,
     };
 
     storeNotifications.addNotification(notificationObject);
@@ -19,7 +21,7 @@ export function useNotifications() {
     const notificationObject = {
       type: NotificationTypes.ERROR,
       title: 'Niestety!',
-      description: `Zakład przegrany! Przegrywasz ${totalLose} PLN`,
+      description: `Zakład przegrany! Przegrywasz ${totalLose.toFixed(2)} PLN`,
     };
 
     storeNotifications.addNotification(notificationObject);
@@ -70,7 +72,7 @@ export function useNotifications() {
   const setSettingsAccountAddSuccessfullNotification = (amount: number) => {
     const notificationObject = {
       type: NotificationTypes.POSITIVE,
-      description: `Do konta dodano ${amount}!`,
+      description: `Do konta dodano ${amount.toFixed(2)}!`,
     };
 
     storeNotifications.addNotification(notificationObject);
@@ -81,7 +83,7 @@ export function useNotifications() {
   ) => {
     const notificationObject = {
       type: NotificationTypes.POSITIVE,
-      description: `Z konta odjęto ${amount}!`,
+      description: `Z konta odjęto ${amount.toFixed(2)}!`,
     };
 
     storeNotifications.addNotification(notificationObject);
@@ -121,7 +123,9 @@ export function useNotifications() {
   const setSingleWinNotification = (totalWin: number) => {
     const notificationObject = {
       type: NotificationTypes.POSITIVE,
-      description: `Gratulacje! Wygrywasz ${totalWin} z zakładu SOLO`,
+      description: `Gratulacje! Wygrywasz ${totalWin.toFixed(
+        2,
+      )} z zakładu SOLO`,
     };
 
     storeNotifications.addNotification(notificationObject);
@@ -130,7 +134,9 @@ export function useNotifications() {
   const setSingleLostNotification = (totalLose: number) => {
     const notificationObject = {
       type: NotificationTypes.ERROR,
-      description: `Niestety! Przegrywasz ${totalLose} z zakładu SOLO`,
+      description: `Niestety! Przegrywasz ${totalLose.toFixed(
+        2,
+      )} z zakładu SOLO`,
     };
 
     storeNotifications.addNotification(notificationObject);
