@@ -3,14 +3,14 @@
     <div class="navbar__container">
       <div class="navbar__container--left">
         <p class="navbar__container__title">
-          {{ pageTitle }}
+          {{ title }}
         </p>
         <div
           v-if="userEmail.length > 0"
           class="navbar__container__links"
         >
           <inline-button
-            v-for="link in links"
+            v-for="link in props.links"
             :key="link.name"
             :class="[
               'navbar-link',
@@ -34,73 +34,41 @@
           />
           <p class="navbar__container__user__title">{{ userEmail }}</p>
         </div>
-        <secondary-button @click="logoutUser">Logout</secondary-button>
+        <secondary-button @click="logout">Logout</secondary-button>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, reactive, onMounted, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
+import type { PropType } from 'vue';
 
 import { Icon, InlineButton, SecondaryButton } from '@/components';
 
-import { useStoreAuth } from '@/modules/authModule/store/storeAuth';
-
-const storeAuth = useStoreAuth();
-
-const route = useRoute();
-
-const pageTitle = ref('');
-
-const links = reactive([
-  {
-    name: 'Parlays',
-    to: '/bets',
+const props = defineProps({
+  isActiveRoute: {
+    type: Function,
+    required: true,
   },
-  {
-    name: 'Singles',
-    to: '/singles',
+  links: {
+    type: Array as PropType<{ name: string; to: string }[]>,
+    required: true,
   },
-  {
-    name: 'Targets',
-    to: '/targets',
+  title: {
+    type: String,
+    required: true,
   },
-  {
-    name: 'Guide',
-    to: '/guide',
+  userEmail: {
+    type: String,
+    required: true,
   },
-  {
-    name: 'Settings',
-    to: '/settings',
-  },
-]);
-
-const userEmail = computed(() => {
-  return storeAuth.user?.email ?? '';
 });
 
-const setPageTitle = (): void => {
-  pageTitle.value = window.innerWidth > 768 ? 'Bet Tracker' : 'BT';
+const emit = defineEmits(['logout']);
+
+const logout = () => {
+  emit('logout');
 };
-
-const isActiveRoute = (linkRoute: string): boolean => {
-  return route.path === linkRoute;
-};
-
-const logoutUser = (): void => {
-  storeAuth.logoutUser();
-};
-
-onMounted(() => {
-  setPageTitle();
-  window.addEventListener('resize', setPageTitle);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', setPageTitle);
-});
 </script>
 
 <style lang="scss" scoped>
