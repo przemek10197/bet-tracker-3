@@ -9,7 +9,7 @@
       :key="notification.id"
       :title="notification.title"
       :description="notification.description"
-      :type="notification.type"
+      :type="notification.type || NotificationTypes.INFO"
     />
   </transition-group>
 </template>
@@ -20,6 +20,7 @@ import { computed } from 'vue';
 import Notification from './notificationSingle.component.vue';
 import { useStoreNotifications } from '../../store/notifications.store';
 import type { NotificationModel } from '../../models/notification.models';
+import { NotificationTypes } from '../../models/notification.models';
 
 const storeNotifications = useStoreNotifications();
 

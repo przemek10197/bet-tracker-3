@@ -98,14 +98,6 @@ $tab-border: $tab-border-width solid #dddddd;
   padding: 0;
   z-index: 1999;
 
-  @include mobile {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-bottom: 0;
-    background-color: white;
-  }
-
   &__item {
     display: grid;
     align-items: center;
