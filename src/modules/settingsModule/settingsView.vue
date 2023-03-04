@@ -24,5 +24,9 @@ import SettingsSingles from './components/settingsSingles.component.vue';
 
 .tab-container {
   padding: 10 * $spacing-unit 40 * $spacing-unit;
+
+  @include mobile {
+    padding: 0;
+  }
 }
 </style>

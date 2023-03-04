@@ -3,24 +3,31 @@
     v-if="props.singlesStatus"
     class="header"
   >
-    <div>
-      Payroll: <b>{{ Number(props.singlesStatus.status).toFixed(2) }}</b>
+    <div class="header__tag">
+      <h4>Payroll</h4>
+      <div class="header__tag-content">
+        <b>{{ Number(props.singlesStatus.status).toFixed(2) }}</b>
+      </div>
     </div>
-    <div>
-      Record:
-      <b
-        ><span :style="{ color: '#2a9d8f' }">{{
-          props.singlesStatus.wins
-        }}</span>
-        -
-        <span :style="{ color: '#e76f51' }">{{
-          props.singlesStatus.losses
-        }}</span></b
-      >
+    <div class="header__tag">
+      <h4>Record</h4>
+      <div class="header__tag-content">
+        <b
+          ><span :style="{ color: '#2a9d8f' }">{{
+            props.singlesStatus.wins
+          }}</span>
+          -
+          <span :style="{ color: '#e76f51' }">{{
+            props.singlesStatus.losses
+          }}</span></b
+        >
+      </div>
     </div>
-    <div>
-      Winrate:
-      <b> {{ winrate }}</b>
+    <div class="header__tag">
+      <h4>Winrate</h4>
+      <div class="header__tag-content">
+        <b> {{ winrate }}</b>
+      </div>
     </div>
   </div>
 </template>
@@ -59,9 +66,39 @@ const winrate = computed((): string => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles';
+
 .header {
   display: flex;
   justify-content: space-around;
   margin: 0 200px;
+
+  @include mobile {
+    margin: 0;
+    justify-content: center;
+    gap: 2 * $spacing-unit;
+    font-size: $font-size-s;
+  }
+
+  &__tag {
+    text-align: center;
+
+    &-content {
+      width: 100px;
+      padding: $spacing-unit 0;
+      border: 2px solid #dddddd;
+      border-radius: $border-radius;
+      box-shadow: $shadow-default;
+
+      @include mobile {
+        width: 80px;
+      }
+    }
+
+    h4 {
+      margin: 0;
+      margin-bottom: $spacing-unit;
+    }
+  }
 }
 </style>
