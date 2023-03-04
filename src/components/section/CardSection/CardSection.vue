@@ -36,6 +36,10 @@ $card-section-shadow: $shadow-default;
     padding-bottom: 8px;
     width: 100%;
     color: $color-primary;
+
+    @include mobile {
+      font-size: $font-size-m;
+    }
   }
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
   <div class="stats-container">
     <div
-      v-for="stat in statsData"
+      v-for="(stat, index) in statsData"
       :key="stat.title"
+      :class="`stat-${index}`"
     >
       <h3>{{ stat.title }}</h3>
 
@@ -138,6 +139,18 @@ const statIdentifier = (identifier: string, statTitle: string): string => {
   td {
     padding: 2 * $spacing-unit 6 * $spacing-unit;
     border: 1px solid #dddddd;
+  }
+}
+
+.stat-0 {
+  @include mobile {
+    order: 1;
+  }
+}
+
+.stat-1 {
+  @include mobile {
+    order: 1;
   }
 }
 

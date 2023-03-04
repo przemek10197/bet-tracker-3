@@ -1,31 +1,37 @@
 <template>
   <table class="table">
-    <tr>
-      <th>Data</th>
-      <th>Kategoria</th>
-      <th>Zdarzenie</th>
-      <th>Rodzaj</th>
-      <th>Typ</th>
-      <th>Wkład</th>
-      <th>Kurs</th>
-      <th>Wygrana</th>
-      <th>Wynik</th>
-      <th>Status</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Kategoria</th>
+        <th>Zdarzenie</th>
+        <th>Rodzaj</th>
+        <th>Typ</th>
+        <th>Wkład</th>
+        <th>Kurs</th>
+        <th>Wygrana</th>
+        <th>Wynik</th>
+        <th>Status</th>
+      </tr>
+    </thead>
     <tr
       v-for="single in singles"
       :key="single.id"
       :style="{ 'background-color': singleColor(single) }"
     >
-      <td>{{ singleDateFormatted(single) }}</td>
-      <td>{{ single.sportsName }}</td>
-      <td>{{ single.fixtureName }}</td>
-      <td>{{ single.marketName && single.marketName.slice(0, 30) }}</td>
-      <td>{{ single.selectionName }}</td>
-      <td>{{ single.payin.toFixed(2) }}</td>
-      <td>{{ single.oddsTotal }}</td>
-      <td>{{ Number(single.potentialWinning - single.payin).toFixed(2) }}</td>
-      <td>
+      <td data-label="Data">{{ singleDateFormatted(single) }}</td>
+      <td data-label="Kategoria">{{ single.sportsName }}</td>
+      <td data-label="Zdarzenie">{{ single.fixtureName }}</td>
+      <td data-label="Rodzaj">
+        {{ single.marketName && single.marketName.slice(0, 30) }}
+      </td>
+      <td data-label="Typ">{{ single.selectionName }}</td>
+      <td data-label="Wkład">{{ single.payin.toFixed(2) }}</td>
+      <td data-label="Kurs">{{ single.oddsTotal }}</td>
+      <td data-label="Wygrana">
+        {{ Number(single.potentialWinning - single.payin).toFixed(2) }}
+      </td>
+      <td data-label="Wynik">
         <div v-if="single.result === 'WAITING'">
           <button @click="onWinSingleClick(single)">W</button>
           <button @click="onPushSingleClick(single)">P</button>
@@ -35,7 +41,10 @@
           {{ single.result }}
         </div>
       </td>
-      <td v-if="single.result !== 'WAITING'">
+      <td
+        v-if="single.result !== 'WAITING'"
+        data-label="Status"
+      >
         {{ Number(single.singlesStatus).toFixed(2) }}
       </td>
     </tr>
@@ -157,6 +166,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   font-size: $font-size-s;
+  margin-top: 3 * $spacing-unit;
 }
 
 th {
@@ -180,5 +190,50 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 2 * $spacing-unit;
+}
+
+@include mobile {
+  table {
+    margin-bottom: 4 * $spacing-unit;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 2 * $spacing-unit;
+    font-size: $font-size-xs;
+  }
+
+  table tr:last-child {
+    margin-bottom: 0;
+    border: 0;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
 }
 </style>

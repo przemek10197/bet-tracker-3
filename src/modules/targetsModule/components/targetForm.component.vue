@@ -286,6 +286,7 @@ const onSubmit = async (): Promise<void> => {
     padding: $spacing-unit;
     background-color: $color-background-secondary;
     border-radius: 2 * $border-radius;
+    user-select: none;
   }
 
   &__trigger {
@@ -316,6 +317,14 @@ const onSubmit = async (): Promise<void> => {
 
   @include tablet-landscape {
     grid-template-columns: none;
+  }
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 2 * $spacing-unit;
+    width: auto;
+    padding: 0 3 * $spacing-unit 2 * $spacing-unit;
   }
 
   &__sub-button {

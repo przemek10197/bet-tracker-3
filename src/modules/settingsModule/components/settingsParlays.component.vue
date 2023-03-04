@@ -92,6 +92,8 @@ const setNewStatus = () => {
 <style lang="scss" scoped>
 @import '@/styles';
 
+$mobile-input-width: 90px;
+
 .card-section {
   margin-bottom: 5 * $spacing-unit;
 
@@ -106,6 +108,10 @@ const setNewStatus = () => {
     padding: $spacing-unit;
     font-family: $font-family-default;
     font-size: 16px;
+
+    @include mobile {
+      width: $mobile-input-width;
+    }
   }
 
   &__button {
