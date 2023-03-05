@@ -98,9 +98,9 @@ const sortedAccountDayTracking = computed(() => {
   }
 
   return Object.keys(storeStatistics.accountDayTracking)
-    .slice(-30)
     .sort()
     .reverse()
+    .slice(0, 30)
     .reduce((result: AccountDateTracking, key: string) => {
       result[key] = storeStatistics.accountDayTracking![key];
       return result;
