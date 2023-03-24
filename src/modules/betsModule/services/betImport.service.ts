@@ -5,7 +5,7 @@ import type {
   StsBetLeg,
   BetclicBetLeg,
 } from '../models/bet.models';
-import { BetResult } from '../types/bet.types';
+import { BetResult, LegResult } from '../types/bet.types';
 import { Bookmaker } from '../models/enums';
 import { useStoreBets } from '../store/storeBets';
 
@@ -149,7 +149,7 @@ class BetImportService {
           selectionName: leg.odds['long-name'],
           oddsPlaced: Number(leg.odds.value),
           result:
-            leg.result === 'UNRESOLVED' ? BetResult.UNKNOWN : BetResult.WIN,
+            leg.result === 'UNRESOLVED' ? LegResult.UNKNOWN : LegResult.WIN,
         };
       },
     );
