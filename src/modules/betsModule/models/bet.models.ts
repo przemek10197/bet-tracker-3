@@ -44,6 +44,7 @@ export interface BetclicBetLeg {
 export interface BetclicBet {
   bet_selections: Array<BetclicBetLeg>;
   id?: string;
+  mbb_amount?: string;
   odds: number;
   placed_date_utc: string | Date;
   result: string;
