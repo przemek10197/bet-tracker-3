@@ -32,7 +32,10 @@
         {{ Number(single.potentialWinning - single.payin).toFixed(2) }}
       </td>
       <td data-label="Wynik">
-        <div v-if="single.result === 'WAITING'">
+        <div
+          v-if="single.result === 'WAITING'"
+          class="action-row"
+        >
           <button @click="onWinSingleClick(single)">W</button>
           <button @click="onPushSingleClick(single)">P</button>
           <button @click="onLooseSingleClick(single)">L</button>
@@ -235,5 +238,9 @@ th {
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+.action-row {
+  display: flex;
 }
 </style>

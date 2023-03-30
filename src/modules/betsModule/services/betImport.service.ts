@@ -89,7 +89,7 @@ class BetImportService {
       newBet.placed_date_utc,
       BetResult.UNKNOWN,
       newBet.stake + newBet.tax_on_stake,
-      newBet.winnings + (newBet.mbb_amount || 0),
+      (newBet.winnings + (newBet.mbb_amount || 0)).toFixed(2),
       Bookmaker.BETCLIC,
       betLegs,
     );
