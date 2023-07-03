@@ -98,8 +98,13 @@ class BetImportService {
   }
 
   public async importFromFortuna(importedBet: string): Promise<void> {
-    const { placementTime, result, oddsTotal, payin, potentialWinning } =
-      JSON.parse(importedBet);
+    const {
+      oddsTotal,
+      placementDetailsTime,
+      placementDetailsPaid,
+      potentialWinning,
+      result,
+    } = JSON.parse(importedBet);
 
     let betLegs = JSON.parse(importedBet).legs.map((leg: BetLeg) => {
       return {
@@ -119,9 +124,9 @@ class BetImportService {
 
     const betToImport = this.formattedBet(
       oddsTotal,
-      placementTime,
+      placementDetailsTime,
       result,
-      payin,
+      placementDetailsPaid,
       potentialWinning,
       Bookmaker.FORTUNA,
       betLegs,
